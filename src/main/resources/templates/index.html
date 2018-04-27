@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" style="height: 35px" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="padding-top: 15px">Blog</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/#">我的首页</a>
+                </li>
+                <li>
+                    <a href="/#">创建博客</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">账号管理
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">管理</li>
+                        <li>
+                            <a href="#">博客信息</a>
+                        </li>
+                        <li>
+                            <a href="#">创建博文</a>
+                        </li>
+                        <li>
+                            <a href="#">博客管理</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">账号</li>
+                        <li>
+                            <a href="#">更改密码</a>
+                        </li>
+                        <li>
+                            <a href="#">退出登录</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" name="key" placeholder="搜索文章标题">
+            </form>
+        </div>
+    </div>
+</nav>
+<body>
+<div class="container-fluid" style="margin-top: 50px;">
+
+    <div class="row" style="background: -webkit-linear-gradient(45deg, #4A4771 0%, #7C3875 100%);padding: 80px 0;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5" style="text-align: center;">
+            <h2 style="color: white;padding: 30px">欢迎来到SmartBlog!优雅简洁的外观设计,细心的交互方式。</h2>
+        </div>
+        <div class="col-sm-5">
+            <h4 style="color: white;padding: 30px;">SmartBlogBlog 帮助您更快捷地创建博客，更方便地浏览您的博客内容，使用 Markdown
+                创建易读易写的博客文章。Markdown
+                由一些经过精挑细选符号所组成，其作用一目了然。</h4>
+            <button class="btn-success btn-block btn" style="border-radius: 15px;margin:auto;width: 90%;">马上加入</button>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="padding-top: 80px;padding-bottom: 40px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <img src="/img/pic01.jpg" class="img-responsive">
+        </div>
+        <div class="col-sm-5">
+            <h2 style="padding-left: 30px;">Spring Framework</h2>
+            <h4 style="padding: 30px;">Spring的基础思想来源于Rod Johnson的一本著名的j2ee书籍：
+                Expert One-on-One J2EE Design and Development (Programmer to Programmer)，
+                在这本书中，Rod根据他自己多年的j2ee开发经验，提出了众多新颖的思想，
+                在上面那本书附带的代码基础上，以Rod Johnson和Juergen Hoeller两人为核心的一个开发团队经过努力，
+                于2004年3月份发布了Spring Framework
+                1.0版，一经发布就引起了业界的强烈关注。</h4>
+            <button class="btn-info btn-block btn" style="border-radius: 15px;margin:auto;width: 90%;">了解更多</button>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="padding-top: 40px;padding-bottom: 40px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <img src="/img/pic02.jpg" class="img-responsive">
+        </div>
+        <div class="col-sm-5">
+            <h2 style="padding-left: 30px;">Maven</h2>
+            <h4 style="padding: 30px;">Maven项目对象模型(POM)，可以通过一小段描述信息 来管理项目的构建， 报告和文档的软件项目管理工具。
+                Maven 除了以程序构建能力为特色之外，还提供高级项目管理工具。由于 Maven 的缺省构建规则有较高的可重用性，
+                所以常常用两三行 Maven 构建脚本就可以构建简单的项目。由于 Maven 的面向项目的方法，许多 Apache Jakarta
+                项目发文时使用 Maven，而且公司项目采用 Maven 的比例在持续增长。</h4>
+            <button class="btn-info btn-block btn" style="border-radius: 15px;margin:auto;width: 90%;">了解更多</button>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="padding-top: 40px;padding-bottom: 40px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <img src="/img/pic03.jpg" class="img-responsive">
+        </div>
+        <div class="col-sm-5">
+            <h2 style="padding-left: 30px;">Java Persistence API</h2>
+            <h4 style="padding: 30px;">JPA是Java Persistence API的简称，中文名Java持久层API，是JDK
+                5.0注解或XML描述对象－关系表的映射关系，并将运行期的实体对象持久化到数据库中。
+                Sun引入新的JPA ORM规范出于两个原因：其一，简化现有Java EE和Java SE应用开发工作；其二，Sun希望整合ORM技术，实现天下归一。</h4>
+            <button class="btn-info btn-block btn" style="border-radius: 15px;margin:auto;width: 90%;">了解更多</button>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="padding-bottom: 40px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <h2>联系我们</h2>
+            <h4>告诉我们您的想法或者建议，我们会尽快回复您！</h4>
+            <form>
+                <input name="name" type="text" placeholder="如何称呼您" class="form-control" style="margin: 20px 0;">
+                <input name="email" type="email" placeholder="您的邮件地址" class="form-control" style="margin: 20px 0;">
+                <textarea class="form-control" rows="5" style="margin-bottom: 30px"
+                          placeholder="我们很乐意听取您的想法和建议"></textarea>
+                <button class="btn btn-success btn-block" style="margin-bottom: 30px" type="submit">告诉我们！</button>
+            </form>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+</div>
+</body>
+</html>
