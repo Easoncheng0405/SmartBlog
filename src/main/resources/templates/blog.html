@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/editormd.preview.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/lib/marked.min.js"></script>
+    <script src="/lib/prettify.min.js"></script>
+
+    <script src="/lib/raphael.min.js"></script>
+    <script src="/lib/underscore.min.js"></script>
+    <script src="/lib/sequence-diagram.min.js"></script>
+    <script src="/lib/flowchart.min.js"></script>
+    <script src="/lib/jquery.flowchart.min.js"></script>
+    <script src="/js/editormd.js"></script>
+
+
+    <title>博客标题</title>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" style="height: 35px" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">SmartBlog</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/#">我的首页</a>
+                    </li>
+                    <li>
+                        <a href="/#">创建博客</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">账号管理
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">管理</li>
+                            <li>
+                                <a href="#">博客信息</a>
+                            </li>
+                            <li>
+                                <a href="#">创建博文</a>
+                            </li>
+                            <li>
+                                <a href="#">博客管理</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">账号</li>
+                            <li>
+                                <a href="#">更改密码</a>
+                            </li>
+                            <li>
+                                <a href="#">退出登录</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="key" placeholder="搜索文章标题">
+                        <span class="input-group-addon">go!</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+</head>
+<body>
+
+<div class="container" style="margin-top: 50px;">
+    <div style="border: 1px solid #e1e1e1;border-radius: 4px;padding: 30px;margin: 30px;">
+        <h1>认识与入门MarkDown : 了解MarkDown语法</h1><br>
+        <div style="margin: 20px 0;padding: 20px;background-color: hsla(0,0%,71%,.1);border: 1px solid #e1e1e1;border-radius: 4px;font-size: 12px;">
+            <div style="min-height: 47px;">
+                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
+                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
+                </a>
+                <button class="btn btn-success"
+                        style="float: right;margin-top: 4px;padding: 8px 0;width: 100px;font-size: 16px;border-radius: 20px;">
+                    关注
+                </button>
+                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;" href="#">麦大人</a>
+                <p>写了 412776 字，被 17542 人关注，获得了 34289 个喜欢</p>
+            </div>
+            <div style="margin-top: 20px;padding-top: 20px;border-top: 1px solid #e1e1e1;color: #969696;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                作者很懒，还没来得及给自己添加自我介绍...
+            </div>
+        </div>
+        <hr>
+        <div id="test-editormd-view">
+            <textarea style="display:none;" name="test-editormd-markdown-doc">###Hello world!</textarea>
+        </div>
+        <div id="test-editormd-view2">
+            <textarea id="append-test" style="display:none;"></textarea>
+        </div>
+        <p style="float: right">© 著作权归作者所有</p>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var testEditormdView, testEditormdView2;
+
+            $.get("/blog/content", function (markdown) {
+
+                testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+                    markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
+                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    //toc             : false,
+                    tocm            : true,    // Using [TOCM]
+                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                    //gfm             : false,
+                    //tocDropdown     : true,
+                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                    emoji           : true,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true   // 默认不解析
+
+                });
+
+                //console.log("返回一个 jQuery 实例 =>", testEditormdView);
+
+                // 获取Markdown源码
+                //console.log(testEditormdView.getMarkdown());
+
+                //alert(testEditormdView.getMarkdown());
+            });
+
+            testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
+                htmlDecode: "style,script,iframe",  // you can filter tags decode
+                emoji: true,
+                taskList: true,
+                tex: true,  // 默认不解析
+                flowChart: true,  // 默认不解析
+                sequenceDiagram: true,  // 默认不解析
+            });
+        });
+    </script>
+
+    <div class="col-sm-2"></div>
+
+</div>
+</body>
+</html>
