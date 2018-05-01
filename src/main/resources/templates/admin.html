@@ -81,7 +81,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-cloud"></i>
+                            <i class="nav-icon fa fa-file-text"></i>
                             <p>草稿箱</p>
                         </a>
                     </li>
@@ -89,6 +89,12 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa fa-trash"></i>
                             <p>废纸篓</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-user-plus"></i>
+                            <p>个人中心</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -108,7 +114,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Alexander Pierce</h1>
+                    <p><a class="m-0 text-dark" href="#" style="font-size: 1.8rem">Alexander Pierce</a>&nbsp;&nbsp;作者很懒，还没来的给自己添加自我介绍...
+                    </p>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
@@ -217,6 +224,36 @@
                         <a type="submit" class="btn btn-danger">删除</a>
                     </td>
                 </tr>
+                <tr>
+                    <td style="padding-top: 15px;">3</td>
+                    <td style="padding-top: 15px;">标题</td>
+                    <td style="padding-top: 15px;">已删除</td>
+                    <td style="padding-top: 15px">2015年2月3日</td>
+                    <td style="padding-top: 15px">JPA</td>
+                    <td style="padding-top: 15px;padding-left: 15px;">
+                        <span class="badge">42</span>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="#">编辑</a>
+                        <a class="btn btn-success" href="/blog?id=2">分类</a>
+                        <a type="submit" class="btn btn-danger">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 15px;">3</td>
+                    <td style="padding-top: 15px;">标题</td>
+                    <td style="padding-top: 15px;">已删除</td>
+                    <td style="padding-top: 15px">2015年2月3日</td>
+                    <td style="padding-top: 15px">JPA</td>
+                    <td style="padding-top: 15px;padding-left: 15px;">
+                        <span class="badge">42</span>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="#">编辑</a>
+                        <a class="btn btn-success" href="/blog?id=2">分类</a>
+                        <a type="submit" class="btn btn-danger">删除</a>
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <ul class="pagination float-right">
@@ -228,11 +265,18 @@
             </ul>
         </div>
     </section>
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
+
+
     <script src="/js/jquery.min.js"></script>
     <script src="/js/adminlte.js"></script>
+</div>
 </body>
-
+<footer class="main-footer">
+    <strong>Copyright &copy; 2018
+        <a href="http://adminlte.io">SmartBlog</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-alpha
+    </div>
+</footer>
 </html>
