@@ -31,4 +31,9 @@ public class UserServiceImpl implements UserService {
     public User register(User user) {
         return repository.save(user);
     }
+
+    @Override
+    public User login(String email,String password) {
+        return repository.findUserByEmailAndPassword(email,password);
+    }
 }

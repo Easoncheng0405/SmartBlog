@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -37,17 +37,21 @@
                             <i class="fa fa-key"></i>
                         </div>
                     </div>
-                    <div class="form-bottom">
+                    <div class="form-bottom" th:object="${user}">
                         <form role="form" action="" method="post" class="login_assets-form">
+                            <div th:if="${message}" class="alert alert-warning">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong th:text="${message}"></strong>
+                            </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">邮箱地址</label>
                                 <input type="email" name="email" placeholder="邮箱地址" class="form-username form-control"
-                                       id="form-username">
+                                       th:value="${user.email}" id="form-username" >
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="password">密码</label>
                                 <input type="password" name="password" placeholder="输入您的密码"
-                                       class="form-password form-control" id="password">
+                                       th:value="${user.password}" class="form-password form-control" id="password">
                             </div>
                             <button type="submit" class="btn btn-success btn-block">OK!</button>
                         </form>
