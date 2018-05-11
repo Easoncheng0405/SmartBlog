@@ -1,12 +1,20 @@
 package com.jlu.smartblog.controller;
 
+import com.jlu.smartblog.model.Blog;
+import com.jlu.smartblog.model.BlogInfo;
+import com.jlu.smartblog.model.User;
+import com.jlu.smartblog.service.BlogInfoService;
+import com.jlu.smartblog.service.BlogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * Created with IDEA
@@ -18,15 +26,66 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/edit")
 public class EditorController {
 
+    private final BlogService blogService;
+
+    private final BlogInfoService blogInfoService;
+
+    @Autowired
+    public EditorController(BlogService blogService, BlogInfoService blogInfoService) {
+        this.blogService = blogService;
+        this.blogInfoService = blogInfoService;
+    }
+
     @GetMapping
-    public String get(){
+    public String get() {
         return "edit";
     }
 
+    /**
+     * @param session session
+     * @param content 内容
+     * @return 首页
+     */
     @PostMapping
-    public String post(final RedirectAttributes redirectAttributes, @RequestParam("editormd-markdown-doc") String content){
-        //redirectAttributes.addFlashAttribute("",content);
-        System.out.println(content);
-        return "redirect:/blog";
+    public String post(HttpSession session, @RequestParam("content") String content) {
+
+        User user = (User) session.getAttribute("CURRENT_USER");
+        Blog blog = new Blog();
+        blog.setTitle(getTitle(content));
+        blog.setContent(content);
+        blog.setUser(user);
+        blog.setCreateTime(new Date());
+
+        BlogInfo blogInfo = new BlogInfo();
+        blogInfo.setBlog(blog);
+
+        blog = blogService.save(blog);
+
+        blogInfoService.save(blogInfo);
+        return "redirect:/blog/" + blog.getId();
+    }
+
+    /**
+     * 以`#`开头,不得超过50个字符，超过只取前50字符
+     *
+     * @param content 文章内容
+     * @return 标题
+     */
+    private String getTitle(String content) {
+
+        if (!content.startsWith("#")) {
+            return "未命名文章" + DateFormat.getDateTimeInstance().format(new Date());
+        }
+        int i = 1; //直接跳过#字符
+        StringBuilder builder = new StringBuilder();
+        while (i < 50) {
+            char tmp = content.charAt(i);
+            if (tmp != '\n')
+                builder.append(tmp);
+            else
+                break;
+            i++;
+        }
+        return builder.toString();
     }
 }

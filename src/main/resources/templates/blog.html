@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
@@ -18,7 +18,7 @@
     <script src="/js/editormd.js"></script>
 
 
-    <title>博客标题</title>
+    <title th:text="${blog.title}"></title>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -81,7 +81,6 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8" style="border: 1px solid #e1e1e1;border-radius: 4px;margin: 30px 0; padding: 0 10px;">
-            <h1>认识与入门MarkDown : 了解MarkDown语法</h1><br>
             <div style="margin: 20px 0;padding: 20px;background-color: hsla(0,0%,71%,.1);border: 1px solid #e1e1e1;border-radius: 4px;font-size: 12px;">
                 <div style="min-height: 47px;">
                     <img src="/img/1.png" height="48px" width="48px" class="img-circle img-thumbnail" style="float: left;margin-right: 15px;">
@@ -90,7 +89,7 @@
                         关注
                     </button>
                     <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                       href="#">麦大人</a>
+                       href="#" th:text="${user.name}"></a>
                     <p>写了 412776 字，被 17542 人关注，获得了 34289 个喜欢</p>
                 </div>
                 <div style="margin-top: 20px;padding-top: 20px;border-top: 1px solid #e1e1e1;color: #969696;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
@@ -99,7 +98,7 @@
             </div>
             <hr>
             <div id="test-editormd-view">
-                <textarea style="display:none;" name="test-editormd-markdown-doc">###Hello world!</textarea>
+                <textarea style="display:none;" name="test-editormd-markdown-doc"></textarea>
             </div>
             <div id="test-editormd-view2">
                 <textarea id="append-test" style="display:none;"></textarea>

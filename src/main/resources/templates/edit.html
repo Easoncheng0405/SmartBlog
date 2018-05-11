@@ -13,60 +13,27 @@
 <body>
 
 <div>
-    <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">历史消息(
-                        <small>为你保存最多120条消息记录</small>
-                        )
-                    </h4>
+                    <h4 class="modal-title" id="myModalLabel">提示</h4>
                 </div>
-                <div class="modal-body">
-                    <div id="selectTree" class="ztree" style="height:260px;overflow:auto; ">
-                        <div class="alert alert-success">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            还没有收到任何评论呢！<a href="#">(了解如何使用MarkDown书写出层次分明，结构清晰的文章)</a>
-                        </div>
-                        <div style="text-align: center">
-                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
-                                    href="#">认识与入门MarkDown</a>中评论了你</p>
-                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
-                                    href="#">认识与入门MarkDown</a>中评论了你</p>
-                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
-                                    href="#">认识与入门MarkDown</a>中评论了你</p>
-                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
-                                    href="#">认识与入门MarkDown</a>中评论了你</p>
-                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
-                                    href="#">认识与入门MarkDown</a>中评论了你</p>
-                            <p><span class="badge" style="background: green">已读</span><a href="#">Tyler-Smith</a>在文章 <a
-                                    href="#">认识与入门MarkDown</a>中评论了你</p>
-                            <ul class="pagination">
-                                <li><a href="#">&laquo;</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li class="disabled"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <div class="modal-body">请务必在开头为你的文章添加一条一级标题作为博客标题(以`#`开头,不得超过50个字符
+                    ，超过只取前50字符)，否则您的文章将以未命名保存。</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">全部设为已读</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">我明白了</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+    <script>
+        $('#tips').modal('show');
+    </script>
     <form id="form" method="POST" action="/edit">
         <div class="editormd" id="editormd">
-            <textarea class="editormd-markdown-textarea" name="editormd-markdown-doc"></textarea>
-
-            <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
-            <textarea class="editormd-html-textarea" name="editormd-html-code"></textarea>
+            <textarea placeholder="" class="editormd-markdown-textarea" name="content"></textarea>
         </div>
     </form>
     <script type="text/javascript">
@@ -82,8 +49,8 @@
                         "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
                         "h1", "h2", "h3", "h4", "h5", "h6", "|",
                         "list-ul", "list-ol", "hr", "|",
-                        "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak", "|",
-                        "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|",
+                        "link", "reference-link", "code", "preformatted-text", "code-block", "table", "datetime","emoji", "html-entities", "pagebreak", "|",
+                        "goto-line", "watch", "preview", "clear", "search", "|",
                         "help", "info", "||", "save", "giveup", "options"
                     ];
                 },
@@ -103,15 +70,15 @@
                      * @param {String}      selection  编辑器选中的文本
                      */
                     options: function (cm, icon, cursor, selection) {
-                        $('#settings').modal('show');
+
                     },
                     save: function (cm, icon, cursor, selection) {
-
+                        $('#form').submit();
                     }
                 },
-                theme: "dark",
-                previewTheme: "dark",
-                editorTheme: "pastel-on-dark",
+                theme: "default",
+                previewTheme: "default",
+                editorTheme: "default",
                 codeFold: true,
                 //syncScrolling : false,
                 saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
@@ -141,6 +108,7 @@
 
             });
             testEditor.fullscreen();
+
         });
     </script>
 </div>
