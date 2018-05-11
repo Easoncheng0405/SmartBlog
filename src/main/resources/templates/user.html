@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Alexander Pierce</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/form-elements.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" style="height: 35px" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SmartBlog</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/admin">我的首页</a>
+                </li>
+                <li>
+                    <a href="/#">创建博客</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">账号管理
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">管理</li>
+                        <li>
+                            <a href="#">博客信息</a>
+                        </li>
+                        <li>
+                            <a href="#">创建博文</a>
+                        </li>
+                        <li>
+                            <a href="#">博客管理</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">账号</li>
+                        <li>
+                            <a href="#">更改密码</a>
+                        </li>
+                        <li>
+                            <a href="/logout">退出登录</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/admin">登陆</a>
+                </li>
+                <li>
+                    <a href="/#">注册</a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="key" placeholder="搜索文章标题">
+                    <span class="input-group-addon">go!</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<body>
+
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+        <div id="account"
+             style="margin: 20px 10px;padding: 20px;background-color: hsla(0,0%,71%,.1);border: 1px solid #e1e1e1;border-radius: 4px;font-size: 12px;">
+            <div style="min-height: 47px;">
+                <img src="/img/1.png" height="48px" width="48px" class="img-circle img-thumbnail"
+                     style="float: left;margin-right: 15px;">
+                <button class="btn btn-success"
+                        style="float: right;margin-top: 4px;padding: 8px 0;width: 100px;font-size: 16px;border-radius: 20px;">
+                    关注
+                </button>
+                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
+                   href="#">麦大人</a>
+                <p>写了 412776 字，被 17542 人关注，获得了 34289 个喜欢</p>
+            </div>
+        </div>
+        <hr>
+        <div class="col-sm-8">
+            <div id="list">
+                <div>
+                    <h2><a href="#" style="color: black">Spring Framework</a></h2>
+                    <p>
+                        Spring的基础思想来源于Rod Johnson的一本著名的j2ee书籍： Expert One-on-One
+                        J2EE Design and Development (Programmer to Programmer)， 在这本书中，
+                        Rod根据他自己多年的j2ee开发经验，提出了众多新颖的思想， 在上面那本书附带的代码基础上，
+                        以Rod Johnson和Juergen Hoeller两人为核心的一个开发团队经过努力，
+                        于2004年3月份发布了Spring Framework 1.0版，一经发布就引起了业界的强烈关注。
+                    </p>
+                    <p><i class="fa fa-eye" title="浏览" aria-hidden="true" style="margin: 0 15px;"></i>2000
+                        <i class="fa fa-comment-o" title="评论" aria-hidden="true" style="margin: 0 15px;"></i>68
+                        <i class="fa fa-thumbs-o-up" title="喜欢" aria-hidden="true" style="margin: 0 15px;"></i>102
+                        <b style="float: right">2018-05-21 18:23:33</b></p>
+                    <hr>
+                </div>
+                <div>
+
+                    <h2>Maven</h2>
+                    <p>
+                        Maven项目对象模型(POM)，可以通过一小段描述信息 来管理项目的构建，
+                        报告和文档的软件项目管理工具。 Maven 除了以程序构建能力为特色之外
+                        ，还提供高级项目管理工具。由于 Maven 的缺省构建规则有较高的可重用性，
+                        所以常常用两三行 Maven 构建脚本就可以构建简单的项目。由于 Maven 的面向项目的方法
+                        ，许多 Apache Jakarta 项目发文时使用 Maven，而且公司项目采用 Maven 的比例在持续增长。
+                    </p>
+                    <p><i class="fa fa-eye" title="浏览" aria-hidden="true" style="margin: 0 15px;"></i>2000
+                        <i class="fa fa-comment-o" title="评论" aria-hidden="true" style="margin: 0 15px;"></i>68
+                        <i class="fa fa-thumbs-o-up" title="喜欢" aria-hidden="true" style="margin: 0 15px;"></i>102
+                        <b style="float: right">2018-05-21 18:23:33</b></p>
+                    <hr>
+                </div>
+                <div>
+                    <h2>Java Persistence API</h2>
+                    <p>
+                        JPA是Java Persistence API的简称，中文名Java持久层API，
+                        是JDK 5.0注解或XML描述对象－关系表的映射关系，
+                        并将运行期的实体对象持久化到数据库中。 Sun引入新的JPA
+                        ORM规范出于两个原因：其一，简化现有Java EE和Java SE应用开发工作；
+                        其二，Sun希望整合ORM技术，实现天下归一。
+                    </p>
+                    <p><i class="fa fa-eye" title="浏览" aria-hidden="true" style="margin: 0 15px;"></i>2000
+                        <i class="fa fa-comment-o" title="评论" aria-hidden="true" style="margin: 0 15px;"></i>68
+                        <i class="fa fa-thumbs-o-up" title="喜欢" aria-hidden="true" style="margin: 0 15px;"></i>102
+                        <b style="float: right">2018-05-21 18:23:33</b></p>
+                    <hr>
+                </div>
+            </div>
+            <nav style="text-align: center">
+                <ul class="pagination">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-sm-4">
+            <div style="margin: 0 30px;">
+            <h3>个人介绍</h3>
+            <p>作者很懒，还没来得及添加自我介绍</p>
+            <hr>
+            <h3>文章分类</h3>
+            <div class="list-group" style="text-align: center;">
+                <a class="list-group-item" href="#">Java</a>
+                <a class="list-group-item" href="#">Spring-MVC</a>
+                <a class="list-group-item" href="#">效率工具</a>
+                <a class="list-group-item" href="#">数据结构与算法</a>
+                <a class="list-group-item" href="#">汇编语言</a>
+                <a class="list-group-item" href="#">前端设计</a>
+
+            </div>
+            <hr>
+            <h3>友链</h3>
+            <p><a href="#"  class="fa fa-home fa-3x" title="个人主页" style="margin: 0 10px;color: black"></a>
+                <a href="#" class="fa fa-weibo fa-3x" title="微博" style="margin: 0 10px;color: black"></a>
+                <a href="#" class="fa fa-github fa-3x" title="github" style="margin: 0 10px;color: black"></a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<footer class="footer" style="margin: 40px 0;text-align: center">
+    <div class="container">
+
+        <div>
+            <strong>Copyright &copy; 2018<a href="#">SmartBlog</a>.</strong>All rights reserved.
+        </div>
+
+    </div>
+</footer>
+</html>
