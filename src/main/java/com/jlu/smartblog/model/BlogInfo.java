@@ -17,7 +17,7 @@ public class BlogInfo {
      * id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /**
@@ -45,6 +45,9 @@ public class BlogInfo {
      */
     @OneToOne
     private Blog blog;
+
+    @OneToOne
+    private User user;
 
     public long getId() {
         return id;
@@ -92,5 +95,28 @@ public class BlogInfo {
 
     public void setBlog(Blog blog) {
         this.blog = blog;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BlogInfo blogInfo = (BlogInfo) o;
+
+        return id == blogInfo.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
     }
 }

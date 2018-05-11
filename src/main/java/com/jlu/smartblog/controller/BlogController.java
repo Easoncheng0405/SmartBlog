@@ -31,6 +31,8 @@ public class BlogController {
     @GetMapping("/blog/{id}")
     public String get(@ModelAttribute("content") String content,@PathVariable("id")long id,Model model){
         Blog blog=blogService.findById(id);
+        if(blog==null)
+            return "404";
         model.addAttribute("blog",blog);
         model.addAttribute("user",blog.getUser());
         str=blog.getContent();
@@ -39,7 +41,6 @@ public class BlogController {
     @GetMapping("/blog/content")
     @ResponseBody
     public String getContent(){
-        System.out.println(str.length());
         return str;
     }
 

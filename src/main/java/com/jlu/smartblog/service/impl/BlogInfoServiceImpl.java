@@ -1,10 +1,13 @@
 package com.jlu.smartblog.service.impl;
 
 import com.jlu.smartblog.model.BlogInfo;
+import com.jlu.smartblog.model.User;
 import com.jlu.smartblog.repository.BlogInfoRepository;
 import com.jlu.smartblog.service.BlogInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created with IDEA
@@ -31,5 +34,10 @@ public class BlogInfoServiceImpl implements BlogInfoService {
     @Override
     public BlogInfo findById(long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<BlogInfo> findBlogInfoByUser(User user) {
+        return repository.findBlogInfoByUser(user);
     }
 }

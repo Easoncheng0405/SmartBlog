@@ -1,11 +1,8 @@
 package com.jlu.smartblog.repository;
 
-import com.jlu.smartblog.model.BlogInfo;
-import com.jlu.smartblog.model.User;
+import com.jlu.smartblog.model.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * Created with IDEA
@@ -14,7 +11,7 @@ import java.util.List;
  * github:Easoncheng0405
  */
 @Component
-public interface BlogInfoRepository extends JpaRepository<BlogInfo,Long> {
+public interface UserInfoRepository extends JpaRepository<UserInfo,Long> {
 
-    List<BlogInfo> findBlogInfoByUser(User user);
+
 }

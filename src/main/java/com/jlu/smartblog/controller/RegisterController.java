@@ -1,7 +1,9 @@
 package com.jlu.smartblog.controller;
 
 import com.jlu.smartblog.model.User;
+import com.jlu.smartblog.model.UserInfo;
 import com.jlu.smartblog.model.form.RegisterForm;
+import com.jlu.smartblog.service.UserInfoService;
 import com.jlu.smartblog.service.UserService;
 import com.jlu.smartblog.util.CookieUtil;
 import com.jlu.smartblog.util.CreateRandomField;
@@ -10,10 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Date;
 
@@ -27,11 +29,14 @@ import java.util.Date;
 @RequestMapping("/register")
 public class RegisterController {
 
-    private final UserService service;
+    private final UserService userService;
+
+    private final UserInfoService userInfoService;
 
     @Autowired
-    public RegisterController(UserService service){
-        this.service=service;
+    public RegisterController(UserService userService,UserInfoService userInfoService){
+        this.userService=userService;
+        this.userInfoService=userInfoService;
     }
 
     @GetMapping
@@ -42,7 +47,7 @@ public class RegisterController {
 
     @PostMapping
     public String post(Model model, @ModelAttribute("user")@Valid RegisterForm form, BindingResult result,
-                       HttpServletResponse response, HttpServletRequest request){
+                       HttpServletResponse response, HttpServletRequest request,final RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
             model.addAttribute("user",form);
             model.addAttribute("message",result.getFieldError().getDefaultMessage());
@@ -55,18 +60,25 @@ public class RegisterController {
             return "register";
         }
 
-        if(service.findUserByEmail(user.getEmail())!=null){
+        if(userService.findUserByEmail(user.getEmail())!=null){
             model.addAttribute("message","这个邮箱地址已被注册了");
             return "register";
         }
         user.setName(CreateRandomField.getRandomName());
         user.setTime(new Date());
-        user=service.register(user);
+        user=userService.register(user);
         CookieUtil.set(response,"email",user.getEmail(),7*24*60*60);
         CookieUtil.set(response,"password",user.getPassword(),7*24*60*60);
         request.setAttribute("CURRENT_USER",user);
 
-        return "redirect:/";
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUser(user);
+        userInfo.setDescription("作者很懒，还没来得及添加自我介绍...");
+        userInfoService.save(userInfo);
+        redirectAttributes.addFlashAttribute("message","success");
+        model.addAttribute("user",user);
+        model.addAttribute("info",userInfo);
+        return "redirect:/admin";
     }
 
 }

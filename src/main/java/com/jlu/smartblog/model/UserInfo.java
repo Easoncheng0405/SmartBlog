@@ -1,16 +1,16 @@
 package com.jlu.smartblog.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created with IDEA
  * author:程杰
- * Date:2018/4/28
+ * Date:2018/5/11
  * github:Easoncheng0405
  */
 @Entity
-public class Blog {
+public class UserInfo {
+
 
     /**
      * id
@@ -19,34 +19,30 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    /**
-     * 标题
-     */
-    @Column(nullable = false,length = 30)
-    private String title;
 
     /**
-     * markdown内容
+     * 写作总字数
      */
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(nullable = false,length = 10000)
-    private String content;
+    private long count;
 
     /**
-     * 创建时间
+     * 获得赞数量
      */
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date createTime;
+    private long ulike;
 
     /**
-     * 作者
+     * 关注数量
      */
+    private long interest;
+
+    /**
+     * 个人简介
+     */
+    @Column(length = 150)
+    private String description;
+
     @OneToOne
     private User user;
-
-
 
     public long getId() {
         return id;
@@ -56,28 +52,36 @@ public class Blog {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public long getCount() {
+        return count;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCount(long count) {
+        this.count = count;
     }
 
-    public String getContent() {
-        return content;
+    public long getUlike() {
+        return ulike;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setUlike(long ulike) {
+        this.ulike = ulike;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public long getInterest() {
+        return interest;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setInterest(long interest) {
+        this.interest = interest;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getUser() {
@@ -88,15 +92,14 @@ public class Blog {
         this.user = user;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Blog blog = (Blog) o;
+        UserInfo userInfo = (UserInfo) o;
 
-        return id == blog.id;
+        return id == userInfo.id;
     }
 
     @Override

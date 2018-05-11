@@ -1,6 +1,9 @@
 package com.jlu.smartblog.service;
 
 import com.jlu.smartblog.model.BlogInfo;
+import com.jlu.smartblog.model.User;
+
+import java.util.List;
 
 /**
  * Created with IDEA
@@ -13,4 +16,6 @@ public interface BlogInfoService {
     BlogInfo save(BlogInfo blogInfo);
 
     BlogInfo findById(long id);
+
+    List<BlogInfo> findBlogInfoByUser(User user);
 }

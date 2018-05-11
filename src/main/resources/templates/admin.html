@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title th:text="${user.name}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/adminlte.min.css">
@@ -60,7 +60,7 @@
                     <img src="/img/1.png" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="#" class="d-block" th:text="${user.name}"></a>
                 </div>
             </div>
 
@@ -109,12 +109,14 @@
     </aside>
 </div>
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <div th:unless="${#strings.isEmpty(message)}" class="alert alert-success">
+        <strong>Ha!</strong> 恭喜你注册成功,开始创建你的博客吧!
+    </div>
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <p><a class="m-0 text-dark" href="#" style="font-size: 1.8rem">Alexander Pierce</a>&nbsp;&nbsp;作者很懒，还没来的给自己添加自我介绍...
+                    <p><a class="m-0 text-dark" href="#" style="font-size: 1.8rem" th:text="${user.name}"></a>&nbsp;&nbsp;作者很懒，还没来的给自己添加自我介绍...
                     </p>
                 </div>
                 <!-- /.col -->
@@ -123,7 +125,7 @@
                         <li class="breadcrumb-item">
                             <a href="#">admin</a>
                         </li>
-                        <li class="breadcrumb-item active">Alexander Pierce</li>
+                        <li class="breadcrumb-item active" th:text="${user.name}"></li>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -148,42 +150,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td style="padding-top: 15px;">认识与入门MarkDown : 了解MarkDown语法</td>
+                <tr th:each="info : ${infos}">
+                    <td style="padding-top: 15px;" th:text="${info.blog.title}"></td>
                     <td style="padding-top: 15px;">已发表</td>
-                    <td style="padding-top: 15px">2015年2月3日</td>
+                    <td style="padding-top: 15px" th:text="${#dates.format(info.blog.createTime, 'yyyy-MM-dd')}"></td>
                     <td style="padding-top: 15px">JavaWeb</td>
-                    <td style="padding-top: 15px;padding-left: 15px;">
-                        123131
-                    </td>
-                    <td style="padding-top: 15px;padding-left: 15px;">
-                        1231
-                    </td>
-                    <td style="padding-top: 15px;padding-left: 15px;">
-                        26
-                    </td>
-                    <td>
-                        <form action="/" onsubmit="return confirm('确定要删除这篇文章吗？');">
-                            <a class="btn btn-primary" href="/blog?id=2">编辑</a>
-                            <a class="btn btn-success" href="/blog?id=2">分类</a>
-                            <button type="submit" class="btn btn-danger">删除</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding-top: 15px;">标题</td>
-                    <td style="padding-top: 15px;">已发表</td>
-                    <td style="padding-top: 15px">2015年2月3日</td>
-                    <td style="padding-top: 15px">JavaWeb</td>
-                    <td style="padding-top: 15px;padding-left: 15px;">
-                        123131
-                    </td>
-                    <td style="padding-top: 15px;padding-left: 15px;">
-                        1231
-                    </td>
-                    <td style="padding-top: 15px;padding-left: 15px;">
-                        26
-                    </td>
+                    <td style="padding-top: 15px;padding-left: 15px;" th:text="${info.browse}"></td>
+                    <td style="padding-top: 15px;padding-left: 15px;" th:text="${info.blike}"></td>
+                    <td style="padding-top: 15px;padding-left: 15px;" th:text="${info.collection}"></td>
                     <td>
                         <form action="/" onsubmit="return confirm('确定要删除这篇文章吗？');">
                             <a class="btn btn-primary" href="/blog?id=2">编辑</a>

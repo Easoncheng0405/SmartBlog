@@ -58,7 +58,7 @@ public class EditorController {
 
         BlogInfo blogInfo = new BlogInfo();
         blogInfo.setBlog(blog);
-
+        blogInfo.setUser(user);
         blog = blogService.save(blog);
 
         blogInfoService.save(blogInfo);
@@ -66,7 +66,7 @@ public class EditorController {
     }
 
     /**
-     * 以`#`开头,不得超过50个字符，超过只取前50字符
+     * 以`#`开头,不得超过30个字符，超过只取前30字符
      *
      * @param content 文章内容
      * @return 标题
@@ -78,7 +78,7 @@ public class EditorController {
         }
         int i = 1; //直接跳过#字符
         StringBuilder builder = new StringBuilder();
-        while (i < 50) {
+        while (i < 30) {
             char tmp = content.charAt(i);
             if (tmp != '\n')
                 builder.append(tmp);
