@@ -23,10 +23,10 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/admin">我的首页</a>
+                    <a href="/admin?page=0">我的首页</a>
                 </li>
                 <li>
-                    <a href="/#">创建博客</a>
+                    <a href="/edit">创建博客</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">账号管理
@@ -35,13 +35,10 @@
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">管理</li>
                         <li>
-                            <a href="#">博客信息</a>
+                            <a href="/edit">创建博文</a>
                         </li>
                         <li>
-                            <a href="#">创建博文</a>
-                        </li>
-                        <li>
-                            <a href="#">博客管理</a>
+                            <a href="/admin?page=0">博客管理</a>
                         </li>
                         <li class="divider"></li>
                         <li class="dropdown-header">账号</li>
@@ -59,7 +56,7 @@
                     <a href="/admin">登陆</a>
                 </li>
                 <li>
-                    <a href="/#">注册</a>
+                    <a href="/register">注册</a>
                 </li>
             </ul>
             <form class="navbar-form navbar-right">
@@ -83,7 +80,7 @@
             <p style="color: white;padding: 20px;font-size: 1.2em">SmartBlogBlog 帮助您更快捷地创建博客，更方便地浏览您的博客内容，使用 Markdown
                 创建易读易写的博客文章。Markdown
                 由一些经过精挑细选符号所组成，其作用一目了然。</p>
-            <button class="btn-success btn-block btn" style="border-radius: 15px;margin:auto;width: 90%;">马上加入</button>
+            <a href="/register" class="btn-success btn-block btn" style="border-radius: 15px;margin:auto;width: 90%;">马上加入</a>
         </div>
         <div class="col-sm-1"></div>
     </div>
