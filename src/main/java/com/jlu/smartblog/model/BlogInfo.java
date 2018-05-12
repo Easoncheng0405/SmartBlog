@@ -36,6 +36,12 @@ public class BlogInfo {
     private long collection;
 
     /**
+     * 评论次数
+     */
+    private long comment;
+
+
+    /**
      * 浏览次数
      */
     private long browse;
@@ -79,6 +85,14 @@ public class BlogInfo {
 
     public void setCollection(long collection) {
         this.collection = collection;
+    }
+
+    public long getComment() {
+        return comment;
+    }
+
+    public void setComment(long comment) {
+        this.comment = comment;
     }
 
     public long getBrowse() {

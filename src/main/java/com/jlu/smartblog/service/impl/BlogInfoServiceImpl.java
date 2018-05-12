@@ -5,6 +5,7 @@ import com.jlu.smartblog.model.User;
 import com.jlu.smartblog.repository.BlogInfoRepository;
 import com.jlu.smartblog.service.BlogInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,11 @@ public class BlogInfoServiceImpl implements BlogInfoService {
     @Override
     public BlogInfo findById(long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<BlogInfo> findBlogInfoByUser(User user, Pageable pageable) {
+        return repository.findBlogInfoByUser(user,pageable);
     }
 
     @Override

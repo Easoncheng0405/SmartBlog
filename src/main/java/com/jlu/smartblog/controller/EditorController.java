@@ -7,6 +7,7 @@ import com.jlu.smartblog.service.BlogInfoService;
 import com.jlu.smartblog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,14 +48,16 @@ public class EditorController {
      * @return 首页
      */
     @PostMapping
-    public String post(HttpSession session, @RequestParam("content") String content) {
+    public String post(HttpSession session, @RequestParam("content") String content, Model model) {
 
         User user = (User) session.getAttribute("CURRENT_USER");
-        Blog blog = new Blog();
-        blog.setTitle(getTitle(content));
-        blog.setContent(content);
+        Blog blog = getBlog(content);
+        if (blog == null) {
+            model.addAttribute("content", content);
+            return "edit";
+        }
         blog.setUser(user);
-        blog.setCreateTime(new Date());
+
 
         BlogInfo blogInfo = new BlogInfo();
         blogInfo.setBlog(blog);
@@ -71,21 +74,42 @@ public class EditorController {
      * @param content 文章内容
      * @return 标题
      */
-    private String getTitle(String content) {
-
+    private Blog getBlog(String content) {
+        if (content.length() < 100)
+            return null;
+        String title, description;
+        Blog blog = new Blog();
+        blog.setContent(content);
+        blog.setCreateTime(new Date());
         if (!content.startsWith("#")) {
-            return "未命名文章" + DateFormat.getDateTimeInstance().format(new Date());
-        }
-        int i = 1; //直接跳过#字符
-        StringBuilder builder = new StringBuilder();
-        while (i < 30) {
-            char tmp = content.charAt(i);
-            if (tmp != '\n')
-                builder.append(tmp);
+            title = "未命名文章-" + DateFormat.getDateTimeInstance().format(new Date());
+            if (content.length() < 300)
+                description = content;
             else
-                break;
-            i++;
+                description = content.substring(0, 300);
+            blog.setTitle(title);
+            blog.setDescription(description);
+        } else {
+            int i = 1; //直接跳过#字符
+            StringBuilder builder = new StringBuilder();
+            while (i < 30) {
+                char tmp = content.charAt(i);
+                if (tmp != '\n')
+                    builder.append(tmp);
+                else
+                    break;
+                i++;
+            }
+            title = builder.toString();
+            if (content.length() - i < 300)
+                description = content.substring(i + 1, content.length() - i);
+            else
+                description = content.substring(i + 1, 300);
+            blog.setTitle(title);
+            blog.setDescription(description);
         }
-        return builder.toString();
+
+        return blog;
+
     }
 }

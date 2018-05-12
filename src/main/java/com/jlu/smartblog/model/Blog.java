@@ -26,6 +26,12 @@ public class Blog {
     private String title;
 
     /**
+     * 概要
+     */
+    @Column(nullable = false,length = 300)
+    private String description;
+
+    /**
      * markdown内容
      */
     @Lob
@@ -62,6 +68,14 @@ public class Blog {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getContent() {

@@ -33,6 +33,7 @@ public class BlogController {
         Blog blog=blogService.findById(id);
         if(blog==null)
             return "404";
+        System.out.println(blog.getDescription());
         model.addAttribute("blog",blog);
         model.addAttribute("user",blog.getUser());
         str=blog.getContent();

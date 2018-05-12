@@ -168,13 +168,11 @@
                 </tr>
                 </tbody>
             </table>
-            <ul class="pagination float-right">
-                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-            </ul>
+
+            <a th:if="${page!=0}" th:href="@{'/admin' + '?page=' + ${page - 1}}" class="btn btn-primary previous"
+               style="border-radius: 18px;float: left">上一页</a>
+            <a th:if="${flag!=0}" th:href="@{'/admin' + '?page=' + ${page + 1}}" class="btn btn-primary next"
+               style="border-radius: 18px;float: right">下一页</a>
         </div>
     </section>
 

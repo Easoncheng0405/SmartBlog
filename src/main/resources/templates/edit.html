@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>创建博客</title>
@@ -36,6 +36,7 @@
             <textarea placeholder="" class="editormd-markdown-textarea" name="content"></textarea>
         </div>
     </form>
+    <div id="content" hidden="hidden" th:text="${content}"></div>
     <script type="text/javascript">
         var testEditor;
         $(function () {
@@ -43,6 +44,7 @@
                 width: "100%",
                 height: "100%",
                 path: '../lib/',
+                markdown:$('#content').html(),
                 toolbarIcons: function () {
                     return [
                         "undo", "redo", "|",

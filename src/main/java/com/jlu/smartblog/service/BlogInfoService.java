@@ -2,6 +2,7 @@ package com.jlu.smartblog.service;
 
 import com.jlu.smartblog.model.BlogInfo;
 import com.jlu.smartblog.model.User;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface BlogInfoService {
     BlogInfo findById(long id);
 
     List<BlogInfo> findBlogInfoByUser(User user);
+
+
+    List<BlogInfo> findBlogInfoByUser(User user, Pageable pageable);
 }
