@@ -1,5 +1,6 @@
 package com.jlu.smartblog.repository;
 
+import com.jlu.smartblog.model.Blog;
 import com.jlu.smartblog.model.BlogInfo;
 import com.jlu.smartblog.model.User;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,6 @@ public interface BlogInfoRepository extends JpaRepository<BlogInfo,Long> {
 
     List<BlogInfo> findBlogInfoByUser(User user, Pageable pageable);
 
-
+    BlogInfo findBlogInfoByBlog(Blog blog);
 
 }

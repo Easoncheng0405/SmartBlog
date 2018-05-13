@@ -34,7 +34,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/admin?page=0">我的首页</a>
+                        <a href="/admin">我的首页</a>
                     </li>
                     <li>
                         <a href="/edit">创建博客</a>
@@ -83,14 +83,17 @@
         <div class="col-sm-8" style="border: 1px solid #e1e1e1;border-radius: 4px;margin: 30px 0; padding: 0 10px;">
             <div style="margin: 20px 0;padding: 20px;background-color: hsla(0,0%,71%,.1);border: 1px solid #e1e1e1;border-radius: 4px;font-size: 12px;">
                 <div style="min-height: 47px;">
-                    <img src="/img/1.png" height="48px" width="48px" class="img-circle img-thumbnail" style="float: left;margin-right: 15px;">
+                    <img th:src="@{${info.header}}" height="48px" width="48px" class="img-circle img-thumbnail"
+                         style="float: left;margin-right: 15px;">
                     <button class="btn btn-success"
                             style="float: right;margin-top: 4px;padding: 8px 0;width: 100px;font-size: 16px;border-radius: 20px;">
                         关注
                     </button>
                     <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                       href="#" th:text="${user.name}"></a>
-                    <p>写了 412776 字，被 17542 人关注，获得了 34289 个喜欢</p>
+                       th:href="@{'/user/'+${info.user.id}}" th:text="${info.user.name}"></a>
+                    <p>写了<b th:text="${info.count}"></b> 字，被
+                        <b th:text="${info.interest}"></b> 人关注，获得了
+                        <b th:text="${info.ulike}"></b> 个喜欢</p>
                 </div>
                 <div style="margin-top: 20px;padding-top: 20px;border-top: 1px solid #e1e1e1;color: #969696;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                     作者很懒，还没来得及给自己添加自我介绍...
@@ -112,8 +115,17 @@
         <div class="col-sm-3">
             <p>这篇文章对你有帮助吗？</p>
             <button title="非常棒" type="button" class="btn btn-default"
-                    style="border-radius: 40px;height: 40px;width: 40px;">
+                    style="border-radius: 40px;height: 40px;width: 40px;" onclick="like()">
                 <i class="fa fa-thumbs-o-up"></i>
+                <script>
+                    function like() {
+                        var url = document.location.toString();
+                        var arrUrl = url.split("/");
+                        $.get("/blog/like?id="+arrUrl[arrUrl.length-1], function (result) {
+                            alert(result);
+                        });
+                    }
+                </script>
             </button>
             <button title="毫无用处" type="button" class="btn btn-default"
                     style="border-radius: 40px;height: 40px;width: 40px;">
@@ -340,7 +352,7 @@
 </div>
 </body>
 <footer class="footer" style="margin: 40px 0;text-align: center">
-    <div class="container" >
+    <div class="container">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <strong>Copyright &copy; 2018<a href="#">SmartBlog</a>.</strong>All rights reserved.

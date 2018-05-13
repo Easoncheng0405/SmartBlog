@@ -30,7 +30,7 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final static int pageSize=6;
+    private final static int pageSize = 6;
 
     private final UserInfoService userInfoService;
 
@@ -43,7 +43,8 @@ public class AdminController {
     }
 
     @GetMapping
-    public String get(HttpSession session, Model model, @RequestParam("page") int page) {
+    public String get(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "0",
+            required = false) int page) {
 
         if (page < 0)
             page = 0;
@@ -56,8 +57,8 @@ public class AdminController {
         model.addAttribute("infos", list);
 
         model.addAttribute("page", page); //页号
-        if(blogInfoService.findBlogInfoByUser(user,PageRequest.of(page+1,pageSize)).size()==0){
-            model.addAttribute("flag",0);//如果下一页没有内容吗，放入一个标识符
+        if (blogInfoService.findBlogInfoByUser(user, PageRequest.of(page + 1, pageSize)).size() == 0) {
+            model.addAttribute("flag", 0);//如果下一页没有内容吗，放入一个标识符
         }
         return "admin";
     }

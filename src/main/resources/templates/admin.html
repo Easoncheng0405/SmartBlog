@@ -57,10 +57,10 @@
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="/img/1.png" class="img-circle elevation-2" alt="User Image">
+                    <img th:src="@{${userinfo.header}}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block" th:text="${user.name}"></a>
+                    <a th:href="@{'/user/'+${user.id}}" class="d-block" th:text="${user.name}"></a>
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="/admin?page=0" class="nav-link">
+                        <a th:href="@{'/user/'+${user.id}}" class="nav-link">
                             <i class="nav-icon fa fa-book"></i>
                             <p>我的博客</p>
                         </a>
@@ -163,7 +163,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="/admin?page=0">admin</a>
+                            <a href="/admin">admin</a>
                         </li>
                         <li class="breadcrumb-item active" th:text="${user.name}"></li>
                     </ol>
@@ -187,7 +187,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="info : ${infos}">
-                    <td style="padding-top: 15px;" th:text="${info.blog.title}"></td>
+                    <td style="padding-top: 15px;"><a th:href="@{'/blog/'+${info.blog.id}}" th:text="${info.blog.title}"></a></td>
                     <td style="padding-top: 15px" th:text="${#dates.format(info.blog.createTime, 'yyyy-MM-dd')}"></td>
                     <td style="padding-top: 15px">JavaWeb</td>
                     <td style="padding-top: 15px;padding-left: 15px;" th:text="${info.browse}"></td>

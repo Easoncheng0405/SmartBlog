@@ -3,8 +3,10 @@ package com.jlu.smartblog.controller;
 import com.jlu.smartblog.model.Blog;
 import com.jlu.smartblog.model.BlogInfo;
 import com.jlu.smartblog.model.User;
+import com.jlu.smartblog.model.UserInfo;
 import com.jlu.smartblog.service.BlogInfoService;
 import com.jlu.smartblog.service.BlogService;
+import com.jlu.smartblog.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,10 +33,13 @@ public class EditorController {
 
     private final BlogInfoService blogInfoService;
 
+    private final UserInfoService userInfoService;
+
     @Autowired
-    public EditorController(BlogService blogService, BlogInfoService blogInfoService) {
+    public EditorController(BlogService blogService, BlogInfoService blogInfoService, UserInfoService userInfoService) {
         this.blogService = blogService;
         this.blogInfoService = blogInfoService;
+        this.userInfoService = userInfoService;
     }
 
     @GetMapping
@@ -56,6 +61,7 @@ public class EditorController {
             model.addAttribute("content", content);
             return "edit";
         }
+
         blog.setUser(user);
 
 
@@ -64,6 +70,9 @@ public class EditorController {
         blogInfo.setUser(user);
         blog = blogService.save(blog);
 
+        UserInfo userInfo=userInfoService.findByUser(user);
+        userInfo.setCount(userInfo.getCount()+content.length());
+        userInfoService.save(userInfo);
         blogInfoService.save(blogInfo);
         return "redirect:/blog/" + blog.getId();
     }

@@ -1,5 +1,6 @@
 package com.jlu.smartblog.service.impl;
 
+import com.jlu.smartblog.model.Blog;
 import com.jlu.smartblog.model.BlogInfo;
 import com.jlu.smartblog.model.User;
 import com.jlu.smartblog.repository.BlogInfoRepository;
@@ -40,6 +41,11 @@ public class BlogInfoServiceImpl implements BlogInfoService {
     @Override
     public List<BlogInfo> findBlogInfoByUser(User user, Pageable pageable) {
         return repository.findBlogInfoByUser(user,pageable);
+    }
+
+    @Override
+    public BlogInfo findByBlog(Blog blog) {
+        return repository.findBlogInfoByBlog(blog);
     }
 
     @Override
