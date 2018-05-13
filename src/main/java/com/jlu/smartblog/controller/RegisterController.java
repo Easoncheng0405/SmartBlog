@@ -69,7 +69,7 @@ public class RegisterController {
         user=userService.register(user);
         CookieUtil.set(response,"email",user.getEmail(),7*24*60*60);
         CookieUtil.set(response,"password",user.getPassword(),7*24*60*60);
-        request.setAttribute("CURRENT_USER",user);
+        request.getSession().setAttribute("CURRENT_USER",user);
 
         UserInfo userInfo=new UserInfo();
         userInfo.setUser(user);

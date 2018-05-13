@@ -127,9 +127,14 @@
                     }
                 </script>
             </button>
-            <button title="毫无用处" type="button" class="btn btn-default"
+            <button title="毫无用处" type="button" class="btn btn-default" onclick="dislike()"
                     style="border-radius: 40px;height: 40px;width: 40px;">
                 <i class="fa fa-thumbs-o-down"></i>
+                <script>
+                    function dislike() {
+                        alert("感谢您的反馈，我们会努力做的更好！");
+                    }
+                </script>
             </button>
             <button title="添加到收藏" type="button" class="btn btn-default"
                     style="border-radius: 40px;height: 40px;width: 40px;">
@@ -171,7 +176,7 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <form id="form" th:action="@{'/comment/?id='+${blog.id}}" method="post">
+            <form id="form" th:action="@{'/comment/?bid='+${blog.id}+'&uid='+${user.id}}" method="post">
                 <textarea id="str" placeholder="写下你的评论" name="content" class="form-control" rows="5"></textarea>
             </form>
             <button onclick="comment()" class="btn btn-success btn-block"
@@ -180,7 +185,6 @@
             <script>
                 function comment() {
                     var str = $('#str').val();
-                    alert(str.length);
                     if (str.length <= 0)
                         alert("评论不能为空");
                     else if (str.length > 300)
@@ -199,15 +203,15 @@
         <div class="col-sm-8">
             <hr>
             <div th:each="comment : ${comments}">
-                <div style="margin: 20px 0">
+                <div th:id="${comment.id}" style="margin: 20px 0">
                     <br>
                     <a style="float: left;margin-right: 10px;width: 48px;height: 48px;"
                        th:href="@{'/user/'+${comment.userInfo.user.id}}">
                         <img th:src="@{${comment.userInfo.header}}" class="img-responsive img-circle img-thumbnail"/>
                     </a>
                     <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                       th:href="@{'/user/'+${comment.userInfo.user.id}}" th:text="${comment.userInfo.user.name}">麦大人</a>
-                    <p th:text="${#dates.format(comment.date, 'yyyy-MM-dd HH:mm:SS')}"></p>
+                       th:href="@{'/user/'+${comment.userInfo.user.id}}" th:text="${comment.userInfo.user.name}">   </a>
+                    <p th:text="${#dates.format(comment.date, 'yyyy-MM-dd HH:mm:ss')}"></p>
                     <p class="col-sm-offset-1" style="font-size: large" th:text="${comment.content}"></p>
                     <hr>
                 </div>

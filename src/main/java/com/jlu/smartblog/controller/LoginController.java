@@ -55,7 +55,7 @@ public class LoginController {
         }
         CookieUtil.set(response, "email", form.getEmail(), 7 * 24 * 60 * 60);
         CookieUtil.set(response, "password", form.getPassword(), 7 * 24 * 60 * 60);
-        request.setAttribute("CURRENT_USER", user);
+        request.getSession().setAttribute("CURRENT_USER", user);
         return next == null ? "redirect:/" : "redirect:" + next;
     }
 

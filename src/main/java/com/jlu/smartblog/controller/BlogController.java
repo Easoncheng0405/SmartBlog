@@ -25,7 +25,6 @@ public class BlogController {
 
     private final BlogService blogService;
 
-    private final UserService userService;
 
     private final UserInfoService userInfoService;
 
@@ -36,28 +35,31 @@ public class BlogController {
     private String str;
 
     @Autowired
-    public BlogController(BlogInfoService blogInfoService, BlogService blogService,
-                          UserService userService, UserInfoService userInfoService,
+    public BlogController(BlogInfoService blogInfoService, BlogService blogService, UserInfoService userInfoService,
                           BlogLikeService blogLikeService, CommentService commentService) {
         this.blogInfoService = blogInfoService;
         this.blogService = blogService;
-        this.userService = userService;
         this.userInfoService = userInfoService;
         this.blogLikeService = blogLikeService;
         this.commentService = commentService;
     }
 
     @GetMapping("/blog/{id}")
-    public String get(@ModelAttribute("content") String content, @PathVariable("id") long id, Model model) {
+    public String get(HttpSession session,@ModelAttribute("content") String content, @PathVariable("id") long id, Model model) {
+
         Blog blog = blogService.findById(id);
         if (blog == null)
             return "404";
+        //这个user是当前查博客的人
+        User user=(User)session.getAttribute("CURRENT_USER");
+        System.out.println(user);
         model.addAttribute("blog", blog);
         model.addAttribute("info", userInfoService.findByUser(blog.getUser()));
         str = blog.getContent();
 
         List<Comment> list = commentService.findByBlog(blog);
         model.addAttribute("comments", list);
+        model.addAttribute("user", user);
         BlogInfo blogInfo=blogInfoService.findByBlog(blog);
         blogInfo.setBrowse(blogInfo.getBrowse() + 1);
         blogInfoService.save(blogInfo);
@@ -97,18 +99,20 @@ public class BlogController {
 
 
     @PostMapping("/comment")
-    public String comment(@RequestParam("content") String content, @RequestParam("id") long id) {
+    public String comment(@RequestParam("content") String content, @RequestParam("bid") long bid,@RequestParam("uid") long uid) {
         Comment comment = new Comment();
 
-        Blog blog=blogService.findById(id);
+        Blog blog=blogService.findById(bid);
         comment.setBlog(blog);
         comment.setContent(content);
         comment.setDate(new Date());
-        comment.setUserInfo(userInfoService.findByUser(blog.getUser()));
+        comment.setUserInfo(userInfoService.findById(uid));
         commentService.save(comment);
 
-
-        return "redirect:/blog/"+id;
+        BlogInfo blogInfo=blogInfoService.findByBlog(blog);
+        blogInfo.setComment(blogInfo.getComment()+1);
+        blogInfoService.save(blogInfo);
+        return "redirect:/blog/"+bid+"#"+comment.getId();
     }
 
 
