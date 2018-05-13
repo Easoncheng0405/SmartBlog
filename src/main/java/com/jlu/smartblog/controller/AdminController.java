@@ -30,7 +30,7 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final static int pageSize=1;
+    private final static int pageSize=6;
 
     private final UserInfoService userInfoService;
 

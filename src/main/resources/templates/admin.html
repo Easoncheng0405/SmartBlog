@@ -75,9 +75,47 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-bars"></i>
-                            <p>分类管理</p>
+                            <i class="nav-icon fa fa-bars "></i>
+                            <p>文章分类 <i class="right fa fa-angle-left"></i></p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-info"></i>
+                                    <p>默认分类</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-info"></i>
+                                    <p>类别一</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-info"></i>
+                                    <p>类别二</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-info"></i>
+                                    <p>类别三</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-info"></i>
+                                    <p>类别四</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-info"></i>
+                                    <p>类别五</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -92,17 +130,20 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="/settings" class="nav-link">
                             <i class="nav-icon fa fa-cog"></i>
                             <p>个人中心</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link bottom">
                             <i class="nav-icon fa fa-info-circle"></i>
                             <p>关于SmartBlog</p>
                         </a>
                     </li>
+
+
+
                 </ul>
             </nav>
         </div>
@@ -119,20 +160,16 @@
                     <p><a class="m-0 text-dark" href="#" style="font-size: 1.8rem" th:text="${user.name}"></a>&nbsp;&nbsp;作者很懒，还没来的给自己添加自我介绍...
                     </p>
                 </div>
-                <!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="#">admin</a>
+                            <a href="/admin?page=0">admin</a>
                         </li>
                         <li class="breadcrumb-item active" th:text="${user.name}"></li>
                     </ol>
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
     </div>
     <section class="content">
         <div class="container-fluid">
@@ -158,8 +195,8 @@
                     <td style="padding-top: 15px;padding-left: 15px;" th:text="${info.collection}"></td>
                     <td>
                         <form action="/" onsubmit="return confirm('确定要删除这篇文章吗？');">
-                            <a class="btn btn-primary" href="/blog?id=2">编辑</a>
-                            <a class="btn btn-success" href="/blog?id=2">分类</a>
+                            <a class="btn btn-primary" href="#">编辑</a>
+                            <a class="btn btn-success" href="#">分类</a>
                             <button type="submit" class="btn btn-danger">删除</button>
                         </form>
                     </td>
@@ -167,9 +204,9 @@
                 </tbody>
             </table>
 
-            <a th:if="${page!=0}" th:href="@{'/admin' + '?page=' + ${page - 1}}" class="btn btn-primary previous"
+            <a th:if="${page!=0}" th:href="@{'/admin?page=' + ${page - 1}}" class="btn btn-primary previous"
                style="border-radius: 18px;float: left">上一页</a>
-            <a th:if="${flag!=0}" th:href="@{'/admin' + '?page=' + ${page + 1}}" class="btn btn-primary next"
+            <a th:if="${flag!=0}" th:href="@{'/admin?page=' + ${page + 1}}" class="btn btn-primary next"
                style="border-radius: 18px;float: right">下一页</a>
         </div>
     </section>

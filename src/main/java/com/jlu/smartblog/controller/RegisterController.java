@@ -64,8 +64,8 @@ public class RegisterController {
             model.addAttribute("message","这个邮箱地址已被注册了");
             return "register";
         }
-        user.setName(CreateRandomField.getRandomName());
         user.setTime(new Date());
+        user.setName(CreateRandomField.getRandomName());
         user=userService.register(user);
         CookieUtil.set(response,"email",user.getEmail(),7*24*60*60);
         CookieUtil.set(response,"password",user.getPassword(),7*24*60*60);
@@ -74,11 +74,16 @@ public class RegisterController {
         UserInfo userInfo=new UserInfo();
         userInfo.setUser(user);
         userInfo.setDescription("作者很懒，还没来得及添加自我介绍...");
+        userInfo.setBlogType("默认分类");
+        userInfo.setWeibo("#");
+        userInfo.setGithub("#");
+        userInfo.setHeader("/img/1.png");
+        userInfo.setHome("#");
         userInfoService.save(userInfo);
         redirectAttributes.addFlashAttribute("message","success");
         model.addAttribute("user",user);
         model.addAttribute("info",userInfo);
-        return "redirect:/admin";
+        return "redirect:/admin?page=0";
     }
 
 }

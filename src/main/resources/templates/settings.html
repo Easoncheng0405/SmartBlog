@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>个人中心</title>
+</head>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" style="height: 35px" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SmartBlog</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/admin?page=0">我的首页</a>
+                </li>
+                <li>
+                    <a href="/edit">创建博客</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">账号管理
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">管理</li>
+                        <li>
+                            <a href="#">博客信息</a>
+                        </li>
+                        <li>
+                            <a href="#">创建博文</a>
+                        </li>
+                        <li>
+                            <a href="#">博客管理</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">账号</li>
+                        <li>
+                            <a href="#">更改密码</a>
+                        </li>
+                        <li>
+                            <a href="/logout">退出登录</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="key" placeholder="搜索文章标题">
+                    <span class="input-group-addon">go!</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<body>
+
+<div class="container" style="margin-top: 100px ;">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div  th:objects="${form}">
+                <form class="form-group" action="/settings" method="post">
+                    <div th:if="${message}" class="alert alert-warning">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong th:text="${message}"></strong>
+                    </div>
+                    <label for="header">头像URL(只能使用图片外链，有10张系统默认头像为/img/1.png ~ /img/10.png)</label>
+                    <input class="form-control" name="header" id="header" th:value="${form.header}">
+                    <hr>
+                    <label for="name">用户名</label>
+                    <input class="form-control" name="name" id="name" th:value="${form.name}">
+                    <hr>
+                    <label for="email">电子邮件</label>
+                    <input class="form-control" name="email" id="email" th:value="${form.email}" disabled="disabled">
+                    <hr>
+                    <label for="type">文章分类(使用英文':'分隔，每个类型不超过10个字符，最多6个分类)</label>
+                    <input class="form-control" name="type" id="type" th:value="${form.type}">
+                    <hr>
+                    <label for="passwrod">密码</label>
+                    <input class="form-control" name="password" th:value="${form.password}" type="password" id="passwrod" placeholder="密码 长度小于25个字符">
+                    <hr>
+                    <label for="confirm">确认密码</label>
+                    <input class="form-control" type="password" th:value="${form.confirm}" name="confirm" id="confirm" placeholder="确认密码">
+                    <hr>
+                    <label for="github">github地址</label>
+                    <input class="form-control" name="github" id="github" th:value="${form.github}">
+                    <hr>
+                    <label for="weibo">微博地址</label>
+                    <input class="form-control" name="weibo" id="weibo" th:value="${form.weibo}">
+                    <hr>
+                    <label for="home">个人首页</label>
+                    <input class="form-control" name="home" id="home" th:value="${form.home}">
+                    <button class="btn btn-block btn-success" type="submit" style="margin-top: 50px;">保存</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+</body>
+<footer class="footer" style="margin: 40px 0;text-align: center">
+    <div class="container">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <strong>Copyright &copy; 2018<a href="#">SmartBlog</a>.</strong>All rights reserved.
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</footer>
+</html>

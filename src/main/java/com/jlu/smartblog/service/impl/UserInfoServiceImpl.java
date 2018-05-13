@@ -1,5 +1,6 @@
 package com.jlu.smartblog.service.impl;
 
+import com.jlu.smartblog.model.User;
 import com.jlu.smartblog.model.UserInfo;
 import com.jlu.smartblog.repository.UserInfoRepository;
 import com.jlu.smartblog.service.UserInfoService;
@@ -30,5 +31,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserInfo findById(long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public UserInfo findByUser(User user) {
+        return repository.findByUser(user);
     }
 }

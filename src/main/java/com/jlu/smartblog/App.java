@@ -16,7 +16,12 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class App {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
+
+        String str = ":a:b:c:d:";
+        String[] res = str.split(":");
+        for (String a : res)
+            System.out.println(a);
 
         SpringApplication.run(App.class,args);
     }

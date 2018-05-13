@@ -25,7 +25,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        String urls[]=new String[]{"/admin","/edit"};
+        String urls[]=new String[]{"/admin","/edit","/settings"};
         registry.addInterceptor(new LoginInterceptor(service)).addPathPatterns(urls);
     }
 }

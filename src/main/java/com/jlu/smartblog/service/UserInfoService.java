@@ -1,5 +1,6 @@
 package com.jlu.smartblog.service;
 
+import com.jlu.smartblog.model.User;
 import com.jlu.smartblog.model.UserInfo;
 
 /**
@@ -13,4 +14,6 @@ public interface UserInfoService {
     UserInfo save(UserInfo userInfo);
 
     UserInfo findById(long id);
+
+    UserInfo findByUser(User user);
 }

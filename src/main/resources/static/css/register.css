@@ -165,7 +165,6 @@ img { max-width: 100%; }
 }
 
 .copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
-/***** Media queries *****/
 
 @media (min-width: 992px) and (max-width: 1199px) {}
 

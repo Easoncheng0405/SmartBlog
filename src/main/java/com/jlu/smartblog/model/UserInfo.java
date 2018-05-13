@@ -21,9 +21,34 @@ public class UserInfo {
 
 
     /**
+     * 头像URL
+     */
+    @Column(length = 100)
+    private String header;
+
+    /**
+     * github地址
+     */
+    @Column(length = 100)
+    private String github;
+
+    /**
+     * 微博链接
+     */
+    @Column(length = 100)
+    private String weibo;
+
+
+    /**
+     * 个人链接
+     */
+    @Column(length = 100)
+    private String home;
+    /**
      * 写作总字数
      */
     private long count;
+
 
     /**
      * 获得赞数量
@@ -41,6 +66,12 @@ public class UserInfo {
     @Column(length = 150)
     private String description;
 
+    /**
+     * 文章个人分类
+     */
+    @Column(length = 150)
+    private String blogType;
+
     @OneToOne
     private User user;
 
@@ -50,6 +81,38 @@ public class UserInfo {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
+    }
+
+    public String getWeibo() {
+        return weibo;
+    }
+
+    public void setWeibo(String weibo) {
+        this.weibo = weibo;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public void setHome(String home) {
+        this.home = home;
     }
 
     public long getCount() {
@@ -82,6 +145,14 @@ public class UserInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getBlogType() {
+        return blogType;
+    }
+
+    public void setBlogType(String blogType) {
+        this.blogType = blogType;
     }
 
     public User getUser() {
