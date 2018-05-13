@@ -10,7 +10,7 @@ import java.util.Date;
  * github:Easoncheng0405
  */
 @Entity
-public class BlogComment {
+public class Comment {
 
     /**
      * id
@@ -23,7 +23,7 @@ public class BlogComment {
      * 评论者
      */
     @OneToOne
-    private User user;
+    private UserInfo userInfo;
 
     /**
      * 所属博客
@@ -44,11 +44,6 @@ public class BlogComment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    /**
-     * 回应评论ID
-     */
-    @Column(nullable = false)
-    private long commentTo;
 
     public long getId() {
         return id;
@@ -58,12 +53,12 @@ public class BlogComment {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     public Blog getBlog() {
@@ -90,20 +85,13 @@ public class BlogComment {
         this.date = date;
     }
 
-    public long getCommentTo() {
-        return commentTo;
-    }
-
-    public void setCommentTo(long commentTo) {
-        this.commentTo = commentTo;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BlogComment that = (BlogComment) o;
+        Comment that = (Comment) o;
 
         return id == that.id;
     }

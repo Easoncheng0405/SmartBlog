@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
 
+    User findById(long id);
+
     User findUserByEmail(String email);
 
     User register(User user);

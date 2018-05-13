@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
     public User findUserByEmail(String email) {
         return repository.findUserByEmail(email);
     }

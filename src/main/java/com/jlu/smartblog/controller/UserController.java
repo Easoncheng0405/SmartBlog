@@ -1,9 +1,11 @@
 package com.jlu.smartblog.controller;
 
 import com.jlu.smartblog.model.BlogInfo;
+import com.jlu.smartblog.model.User;
 import com.jlu.smartblog.model.UserInfo;
 import com.jlu.smartblog.service.BlogInfoService;
 import com.jlu.smartblog.service.UserInfoService;
+import com.jlu.smartblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,24 +28,27 @@ import java.util.List;
 @RequestMapping("/user/{id}")
 public class UserController {
 
-    private static final int pageSize=1;
+    private static final int pageSize=3;
 
     private final BlogInfoService blogInfoService;
 
     private final UserInfoService userInfoService;
 
+    private final UserService userService;
+
     @Autowired
-    public UserController(BlogInfoService blogInfoService, UserInfoService userInfoService) {
+    public UserController(BlogInfoService blogInfoService, UserInfoService userInfoService, UserService userService) {
         this.blogInfoService = blogInfoService;
         this.userInfoService = userInfoService;
+        this.userService = userService;
     }
 
     @GetMapping
     public String get(@PathVariable("id") long id, Model model, @RequestParam(value = "page",required = false,defaultValue = "0") int page) {
-        UserInfo userInfo = userInfoService.findById(id);
-        if (userInfo == null)
+        User user = userService.findById(id);
+        if (user == null)
             return "404";
-
+        UserInfo userInfo=userInfoService.findByUser(user);
         Pageable pageable = PageRequest.of(page, pageSize);
         List<BlogInfo> list = blogInfoService.findBlogInfoByUser(userInfo.getUser(),pageable);
 

@@ -1,18 +1,15 @@
 package com.jlu.smartblog.controller;
 
-import com.jlu.smartblog.model.BlogInfo;
-import com.jlu.smartblog.model.BLike;
-import com.jlu.smartblog.model.User;
-import com.jlu.smartblog.model.UserInfo;
-import com.jlu.smartblog.service.BlogInfoService;
-import com.jlu.smartblog.service.BlogLikeService;
-import com.jlu.smartblog.service.UserInfoService;
+import com.jlu.smartblog.model.*;
+import com.jlu.smartblog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -26,28 +23,42 @@ public class BlogController {
 
     private final BlogInfoService blogInfoService;
 
+    private final BlogService blogService;
+
+    private final UserService userService;
+
     private final UserInfoService userInfoService;
 
     private final BlogLikeService blogLikeService;
 
+    private final CommentService commentService;
+
     private String str;
 
     @Autowired
-    public BlogController(BlogInfoService blogInfoService, UserInfoService userInfoService, BlogLikeService blogLikeService) {
+    public BlogController(BlogInfoService blogInfoService, BlogService blogService,
+                          UserService userService, UserInfoService userInfoService,
+                          BlogLikeService blogLikeService, CommentService commentService) {
         this.blogInfoService = blogInfoService;
+        this.blogService = blogService;
+        this.userService = userService;
         this.userInfoService = userInfoService;
         this.blogLikeService = blogLikeService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/blog/{id}")
     public String get(@ModelAttribute("content") String content, @PathVariable("id") long id, Model model) {
-        BlogInfo blogInfo = blogInfoService.findById(id);
-        if (blogInfo == null)
+        Blog blog = blogService.findById(id);
+        if (blog == null)
             return "404";
-        model.addAttribute("blog", blogInfo.getBlog());
-        model.addAttribute("info", userInfoService.findByUser(blogInfo.getUser()));
-        str = blogInfo.getBlog().getContent();
+        model.addAttribute("blog", blog);
+        model.addAttribute("info", userInfoService.findByUser(blog.getUser()));
+        str = blog.getContent();
 
+        List<Comment> list = commentService.findByBlog(blog);
+        model.addAttribute("comments", list);
+        BlogInfo blogInfo=blogInfoService.findByBlog(blog);
         blogInfo.setBrowse(blogInfo.getBrowse() + 1);
         blogInfoService.save(blogInfo);
         return "blog";
@@ -84,6 +95,21 @@ public class BlogController {
         return "感谢您的反馈";
     }
 
+
+    @PostMapping("/comment")
+    public String comment(@RequestParam("content") String content, @RequestParam("id") long id) {
+        Comment comment = new Comment();
+
+        Blog blog=blogService.findById(id);
+        comment.setBlog(blog);
+        comment.setContent(content);
+        comment.setDate(new Date());
+        comment.setUserInfo(userInfoService.findByUser(blog.getUser()));
+        commentService.save(comment);
+
+
+        return "redirect:/blog/"+id;
+    }
 
 
 }

@@ -121,7 +121,7 @@
                     function like() {
                         var url = document.location.toString();
                         var arrUrl = url.split("/");
-                        $.get("/blog/like?id="+arrUrl[arrUrl.length-1], function (result) {
+                        $.get("/blog/like?id=" + arrUrl[arrUrl.length - 1], function (result) {
                             alert(result);
                         });
                     }
@@ -171,10 +171,25 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <form>
-                <textarea placeholder="写下你的评论" class="form-control" rows="5"></textarea>
-                <button class="btn btn-success btn-block" style="border-radius: 15px;margin: 30px 0">提交评论</button>
+            <form id="form" th:action="@{'/comment/?id='+${blog.id}}" method="post">
+                <textarea id="str" placeholder="写下你的评论" name="content" class="form-control" rows="5"></textarea>
             </form>
+            <button onclick="comment()" class="btn btn-success btn-block"
+                    style="border-radius: 15px;margin: 30px 0">提交评论
+            </button>
+            <script>
+                function comment() {
+                    var str = $('#str').val();
+                    alert(str.length);
+                    if (str.length <= 0)
+                        alert("评论不能为空");
+                    else if (str.length > 300)
+                        alert("字符数不能超过300");
+                    else
+                        $('#form').submit();
+                }
+            </script>
+
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -182,127 +197,21 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <div id="comment-1" style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a><a href="#" style="float: right">回复</a>
-                <p>1楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
+            <hr>
+            <div th:each="comment : ${comments}">
+                <div style="margin: 20px 0">
+                    <br>
+                    <a style="float: left;margin-right: 10px;width: 48px;height: 48px;"
+                       th:href="@{'/user/'+${comment.userInfo.user.id}}">
+                        <img th:src="@{${comment.userInfo.header}}" class="img-responsive img-circle img-thumbnail"/>
+                    </a>
+                    <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
+                       th:href="@{'/user/'+${comment.userInfo.user.id}}" th:text="${comment.userInfo.user.name}">麦大人</a>
+                    <p th:text="${#dates.format(comment.date, 'yyyy-MM-dd HH:mm:SS')}"></p>
+                    <p class="col-sm-offset-1" style="font-size: large" th:text="${comment.content}"></p>
+                    <hr>
+                </div>
             </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <div style="margin: 20px 0">
-                <hr>
-                <br>
-                <a style="float: left;margin-right: 10px;width: 48px;height: 48px;" href="#">
-                    <img src="/img/1.png" class="img-responsive img-circle img-thumbnail"/>
-                </a>
-                <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                   href="#">麦大人</a>
-                <p>2楼 · 2018.04.15 12:21</p>
-                <p class="col-sm-offset-1" style="font-size: large">感谢楼主的分享，谢谢！</p>
-            </div>
-            <nav style="text-align: center">
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
-            </nav>
         </div>
         <div class="col-sm-2"></div>
     </div>
