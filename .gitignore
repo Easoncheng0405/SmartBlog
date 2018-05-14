@@ -58,6 +58,5 @@ local.properties
 *.iws
 out
 .mvn
-lib
 mvnw
 mvnw.cmd
