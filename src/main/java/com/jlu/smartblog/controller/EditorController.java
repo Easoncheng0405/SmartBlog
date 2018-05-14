@@ -63,7 +63,7 @@ public class EditorController {
         }
 
         blog.setUser(user);
-
+        blog.setType("默认分类");
 
         BlogInfo blogInfo = new BlogInfo();
         blogInfo.setBlog(blog);

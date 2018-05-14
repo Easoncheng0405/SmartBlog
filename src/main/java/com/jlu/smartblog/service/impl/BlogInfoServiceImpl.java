@@ -49,6 +49,14 @@ public class BlogInfoServiceImpl implements BlogInfoService {
     }
 
     @Override
+    public List<BlogInfo> findAll(Pageable pageable) {
+
+        return repository.findAll(pageable).getContent();
+    }
+
+
+
+    @Override
     public List<BlogInfo> findBlogInfoByUser(User user) {
         return repository.findBlogInfoByUser(user);
     }

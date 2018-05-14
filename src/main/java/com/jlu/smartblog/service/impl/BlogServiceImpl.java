@@ -45,4 +45,14 @@ public class BlogServiceImpl implements BlogService {
     public List<Blog> findByUser(User user, Pageable pageable) {
         return repository.findBlogByUser(user,pageable);
     }
+
+    @Override
+    public List<Blog> findByUserAndType(User user, String type) {
+        return repository.findBlogByUserAndType(user,type);
+    }
+
+    @Override
+    public List<Blog> findByUserAndType(User user, String type, Pageable pageable) {
+        return repository.findBlogByUserAndType(user,type,pageable);
+    }
 }

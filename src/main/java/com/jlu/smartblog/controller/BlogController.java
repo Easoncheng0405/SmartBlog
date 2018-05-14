@@ -52,7 +52,6 @@ public class BlogController {
             return "404";
         //这个user是当前查博客的人
         User user=(User)session.getAttribute("CURRENT_USER");
-        System.out.println(user);
         model.addAttribute("blog", blog);
         model.addAttribute("info", userInfoService.findByUser(blog.getUser()));
         str = blog.getContent();

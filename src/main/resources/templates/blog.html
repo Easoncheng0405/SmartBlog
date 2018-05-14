@@ -29,12 +29,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SmartBlog</a>
+                <a class="navbar-brand" href="/">SmartBlog</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/admin">我的首页</a>
+                        <a href="/all">热门博客</a>
                     </li>
                     <li>
                         <a href="/edit">创建博客</a>
@@ -46,19 +46,13 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">管理</li>
                             <li>
-                                <a href="#">博客信息</a>
+                                <a href="/edit">创建博文</a>
                             </li>
                             <li>
-                                <a href="#">创建博文</a>
-                            </li>
-                            <li>
-                                <a href="#">博客管理</a>
+                                <a href="/admin">博客管理</a>
                             </li>
                             <li class="divider"></li>
                             <li class="dropdown-header">账号</li>
-                            <li>
-                                <a href="#">更改密码</a>
-                            </li>
                             <li>
                                 <a href="/logout">退出登录</a>
                             </li>
@@ -95,8 +89,9 @@
                         <b th:text="${info.interest}"></b> 人关注，获得了
                         <b th:text="${info.ulike}"></b> 个喜欢</p>
                 </div>
-                <div style="margin-top: 20px;padding-top: 20px;border-top: 1px solid #e1e1e1;color: #969696;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                    作者很懒，还没来得及给自己添加自我介绍...
+                <div style="margin-top: 20px;padding-top: 20px;border-top: 1px solid #e1e1e1;color: #969696;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"
+                     th:text="${info.description}">
+
                 </div>
             </div>
             <hr>
@@ -210,7 +205,7 @@
                         <img th:src="@{${comment.userInfo.header}}" class="img-responsive img-circle img-thumbnail"/>
                     </a>
                     <a style="margin-right: 3px;font-size: 17px;line-height: 1.8;vertical-align: middle;"
-                       th:href="@{'/user/'+${comment.userInfo.user.id}}" th:text="${comment.userInfo.user.name}">   </a>
+                       th:href="@{'/user/'+${comment.userInfo.user.id}}" th:text="${comment.userInfo.user.name}"> </a>
                     <p th:text="${#dates.format(comment.date, 'yyyy-MM-dd HH:mm:ss')}"></p>
                     <p class="col-sm-offset-1" style="font-size: large" th:text="${comment.content}"></p>
                     <hr>
@@ -268,7 +263,7 @@
     <div class="container">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <strong>Copyright &copy; 2018<a href="#">SmartBlog</a>.</strong>All rights reserved.
+            <strong>Copyright &copy; 2018<a href="/">SmartBlog</a>.</strong>All rights reserved.
         </div>
         <div class="col-sm-2"></div>
     </div>

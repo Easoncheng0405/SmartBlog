@@ -20,12 +20,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SmartBlog</a>
+            <a class="navbar-brand" href="/">SmartBlog</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/admin">我的首页</a>
+                    <a href="/all">热门博客</a>
                 </li>
                 <li>
                     <a href="/edit">创建博客</a>
@@ -108,12 +108,15 @@
                     <hr>
                 </div>
             </div>
-            <a th:if="${page!=0}" th:href="@{'/user/'+${info.user.id}+'?page=' + ${page - 1}}"
-               class="btn btn-primary previous"
-               style="border-radius: 18px;float: left">上一页</a>
-            <a th:if="${flag!=0}" th:href="@{'/user/'+${info.user.id}+'?page=' + ${page + 1}}"
-               class="btn btn-primary next"
-               style="border-radius: 18px;float: right">下一页</a>
+            <nav style="text-align: center">
+                <ul class="pagination">
+                    <li id="top" ><a th:href="@{'/user/'+${info.user.id}}">首页</a></li>
+                    <li id="last"><a th:href="@{'/user/'+${info.user.id}+'/?page='+${page-1}}">上一页</a></li>
+                    <li><a th:id="${page}" class="active" th:href="@{'/user/'+${info.user.id}+'/?page='+${page-1}}" th:each="page:${pages}" th:text="${page}"></a></li>
+                    <li id="next"><a th:href="@{'/user/'+${info.user.id}+'/?page='+${page+1}}">下一页</a></li>
+                    <li id="tail"><a th:href="@{'/user/'+${info.user.id}+'/?page=-1'}">尾页</a></li>
+                </ul>
+            </nav>
         </div>
         <div class="col-sm-4">
             <div style="margin: 0 30px;">
@@ -122,13 +125,9 @@
                 <hr>
                 <h3>文章分类</h3>
                 <div class="list-group" style="text-align: center;">
-                    <a class="list-group-item" href="#">Java</a>
-                    <a class="list-group-item" href="#">Spring-MVC</a>
-                    <a class="list-group-item" href="#">效率工具</a>
-                    <a class="list-group-item" href="#">数据结构与算法</a>
-                    <a class="list-group-item" href="#">汇编语言</a>
-                    <a class="list-group-item" href="#">前端设计</a>
-
+                    <div th:each="str:${set}">
+                        <a class="list-group-item" href="#" th:text="${str}"></a>
+                    </div>
                 </div>
                 <hr>
                 <h3>友链</h3>
@@ -147,7 +146,7 @@
 <footer class="footer" style="margin: 40px 0;text-align: center">
     <div class="container">
         <div>
-            <strong>Copyright &copy; 2018<a href="#">SmartBlog</a>.</strong>All rights reserved.
+            <strong>Copyright &copy; 2018<a href="/">SmartBlog</a>.</strong>All rights reserved.
         </div>
 
     </div>

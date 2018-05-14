@@ -49,9 +49,9 @@ public class SettingsController {
         form.setEmail(user.getEmail());
         form.setName(user.getName());
         form.setHome(info.getHome());
+        form.setDescription(info.getDescription());
         form.setPassword(user.getPassword());
         form.setConfirm(user.getPassword());
-        System.out.println(form);
         model.addAttribute("form",form);
         return "settings";
     }
@@ -72,6 +72,7 @@ public class SettingsController {
         userInfo.setGithub(form.getGithub());
         userInfo.setWeibo(form.getWeibo());
         userInfo.setBlogType(form.getType());
+        userInfo.setDescription(form.getDescription());
         userService.register(user);
         userInfoService.save(userInfo);
         return "redirect:/";

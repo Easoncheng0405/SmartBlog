@@ -17,7 +17,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SmartBlog</a>
+            <a class="navbar-brand" href="/">SmartBlog</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -83,7 +83,11 @@
                     <label for="email">电子邮件</label>
                     <input class="form-control" name="email" id="email" th:value="${form.email}" disabled="disabled">
                     <hr>
-                    <label for="type">文章分类(使用英文':'分隔，每个类型不超过10个字符，最多6个分类)</label>
+                    <label for="description">个人简介(10~150字符)</label>
+                    <textarea id="description" name="description" class="form-control" th:field="${form.description}"></textarea>
+                    <hr>
+                    <label for="type">文章分类(使用英文':'分隔，每个类型不超过10个字符，最多6个分类,空类型或字符过多将不会添加)</label>
+                    <label for="type">删除一个分类后该类别的所有文章都将重新分类为默认分类，无法删除默认分类，无法创建同名分类</label>
                     <input class="form-control" name="type" id="type" th:value="${form.type}">
                     <hr>
                     <label for="passwrod">密码</label>
@@ -113,7 +117,7 @@
     <div class="container">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <strong>Copyright &copy; 2018<a href="#">SmartBlog</a>.</strong>All rights reserved.
+            <strong>Copyright &copy; 2018<a href="/">SmartBlog</a>.</strong>All rights reserved.
         </div>
         <div class="col-sm-2"></div>
     </div>

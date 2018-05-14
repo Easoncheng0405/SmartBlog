@@ -22,4 +22,8 @@ public interface BlogService {
     List<Blog> findByUser(User user);
 
     List<Blog> findByUser(User user, Pageable pageable);
+
+    List<Blog> findByUserAndType(User user,String type);
+
+    List<Blog> findByUserAndType(User user,String type,Pageable pageable);
 }

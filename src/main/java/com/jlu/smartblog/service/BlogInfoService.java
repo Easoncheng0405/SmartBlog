@@ -24,4 +24,8 @@ public interface BlogInfoService {
     List<BlogInfo> findBlogInfoByUser(User user, Pageable pageable);
 
     BlogInfo findByBlog(Blog blog);
+
+    List<BlogInfo> findAll(Pageable pageable);
+
+
 }

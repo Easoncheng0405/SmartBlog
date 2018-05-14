@@ -28,6 +28,9 @@ public class UserInfoForm {
     @Size(min = 6, max = 25)
     private String confirm;
 
+    @Size(min=10,max=150)
+    private String description;
+
     @Size(max = 150)
     private String github;
 
@@ -67,6 +70,15 @@ public class UserInfoForm {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPassword() {

@@ -11,6 +11,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+</button>
 <div class="wrapper">
     <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
         <ul class="navbar-nav">
@@ -78,41 +79,11 @@
                             <i class="nav-icon fa fa-bars "></i>
                             <p>文章分类 <i class="right fa fa-angle-left"></i></p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav nav-treeview" th:each="str:${set}">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a th:href="@{'/admin?page=0&type='+${str}}" class="nav-link">
                                     <i class="nav-icon fa fa-circle-o text-info"></i>
-                                    <p>默认分类</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-circle-o text-info"></i>
-                                    <p>类别一</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-circle-o text-info"></i>
-                                    <p>类别二</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-circle-o text-info"></i>
-                                    <p>类别三</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-circle-o text-info"></i>
-                                    <p>类别四</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-circle-o text-info"></i>
-                                    <p>类别五</p>
+                                    <p th:text="${str}"></p>
                                 </a>
                             </li>
                         </ul>
@@ -141,9 +112,6 @@
                             <p>关于SmartBlog</p>
                         </a>
                     </li>
-
-
-
                 </ul>
             </nav>
         </div>
@@ -157,7 +125,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <p><a class="m-0 text-dark" href="#" style="font-size: 1.8rem" th:text="${user.name}"></a>&nbsp;&nbsp;作者很懒，还没来的给自己添加自我介绍...
+                    <p><a class="m-0 text-dark" href="#" style="font-size: 1.8rem" th:text="${user.name}"></a>&nbsp;&nbsp;<small
+                            th:text="${userinfo.description}"></small>
                     </p>
                 </div>
                 <div class="col-sm-6">
@@ -186,28 +155,48 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="info : ${infos}">
-                    <td style="padding-top: 15px;"><a th:href="@{'/blog/'+${info.blog.id}}" th:text="${info.blog.title}"></a></td>
-                    <td style="padding-top: 15px" th:text="${#dates.format(info.blog.createTime, 'yyyy-MM-dd')}"></td>
-                    <td style="padding-top: 15px">JavaWeb</td>
-                    <td style="padding-top: 15px;padding-left: 15px;" th:text="${info.browse}"></td>
-                    <td style="padding-top: 15px;padding-left: 15px;" th:text="${info.blike}"></td>
-                    <td style="padding-top: 15px;padding-left: 15px;" th:text="${info.collection}"></td>
+                <tr th:each="blog : ${blogs}">
+                    <td style="padding-top: 15px;"><a th:href="@{'/blog/'+${blog.id}}" th:text="${blog.title}"></a></td>
+                    <td style="padding-top: 15px" th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}"></td>
+                    <td style="padding-top: 15px" th:text="${blog.type}"></td>
+                    <td style="padding-top: 15px;padding-left: 15px;"><span class="badge" th:text="${blog.blogInfo.browse}"></span></td>
+                    <td style="padding-top: 15px;padding-left: 15px;" th:text="${blog.blogInfo.blike}"></td>
+                    <td style="padding-top: 15px;padding-left: 15px;" th:text="${blog.blogInfo.collection}"></td>
                     <td>
-                        <form action="/" onsubmit="return confirm('确定要删除这篇文章吗？');">
-                            <a class="btn btn-primary" href="#">编辑</a>
-                            <a class="btn btn-success" href="#">分类</a>
-                            <button type="submit" class="btn btn-danger">删除</button>
-                        </form>
+                        <a class="btn btn-primary" href="#">编辑</a>
+                        <button th:id="${blog.id}" class="btn btn-success" onclick="setType(id)">分类</button>
+                        <button type="submit" class="btn btn-danger">删除</button>
+                        <script>
+                            function setType(id) {
+                                var tmp = prompt("输入新分类");
+                                if (tmp != null && tmp != "") {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "/admin/type",
+                                        data: "id=" + id + "&type=" + tmp,
+                                        success: function (data) {
+                                            alert(data)
+                                        },
+                                        error: function () {
+                                            alert("操作失败！")
+                                        }
+                                    })
+                                }
+                            }
+                        </script>
                     </td>
                 </tr>
                 </tbody>
             </table>
-
-            <a th:if="${page!=0}" th:href="@{'/admin?page=' + ${page - 1}}" class="btn btn-primary previous"
-               style="border-radius: 18px;float: left">上一页</a>
-            <a th:if="${flag!=0}" th:href="@{'/admin?page=' + ${page + 1}}" class="btn btn-primary next"
-               style="border-radius: 18px;float: right">下一页</a>
+            <nav style="text-align: center" >
+                <ul class="pagination float-right">
+                    <li class="page-item" id="top" ><a class="page-link" th:href="@{'/admin?page=0&type='+${type}}">首页</a></li>
+                    <li class="page-item" id="last"><a class="page-link" th:href="@{'/admin?page='+${page-1}+'&type='+${type}}">上一页</a></li>
+                    <li class="page-item" th:each="page:${pages}"><a th:id="${page}" class="page-link" th:href="@{'/admin?page='+${page-1}+'&type='+${type}}"  th:text="${page}"></a></li>
+                    <li class="page-item" id="next"><a class="page-link" th:href="@{'/admin?page='+${page+1}+'&type='+${type}}">下一页</a></li>
+                    <li class="page-item" id="tail"><a class="page-link" th:href="@{'/admin?page=-1&type='+${type}}">尾页</a></li>
+                </ul>
+            </nav>
         </div>
     </section>
 
@@ -218,7 +207,7 @@
 </body>
 <footer class="main-footer">
     <strong>Copyright &copy; 2018
-        <a href="#">SmartBlog</a>.</strong>
+        <a href="/">SmartBlog</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 1.0.0-alpha

@@ -32,6 +32,12 @@ public class Blog {
     private String description;
 
     /**
+     * 文章类别
+     */
+    @Column(nullable = false,length = 15)
+    private String type;
+
+    /**
      * markdown内容
      */
     @Lob
@@ -52,7 +58,8 @@ public class Blog {
     @OneToOne
     private User user;
 
-
+    @OneToOne
+    private BlogInfo blogInfo;
 
     public long getId() {
         return id;
@@ -76,6 +83,14 @@ public class Blog {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getContent() {
@@ -102,6 +117,13 @@ public class Blog {
         this.user = user;
     }
 
+    public BlogInfo getBlogInfo() {
+        return blogInfo;
+    }
+
+    public void setBlogInfo(BlogInfo blogInfo) {
+        this.blogInfo = blogInfo;
+    }
 
     @Override
     public boolean equals(Object o) {

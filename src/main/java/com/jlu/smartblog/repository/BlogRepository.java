@@ -15,9 +15,15 @@ import java.util.List;
  * github:Easoncheng0405
  */
 @Component
-public interface BlogRepository extends JpaRepository<Blog,Long> {
+public interface BlogRepository extends JpaRepository<Blog, Long> {
 
     List<Blog> findBlogByUser(User user);
 
     List<Blog> findBlogByUser(User user, Pageable pageable);
+
+    List<Blog> findBlogByUserAndType(User user, String type);
+
+    List<Blog> findBlogByUserAndType(User user, String type, Pageable pageable);
+
+    
 }
