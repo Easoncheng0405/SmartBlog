@@ -26,15 +26,3 @@ SmartBlog算是这两个月来我在天码营学习成果的一次检验，开�
 QQ:597021782 
 
 
-#如何使用
-首先，克隆或下载本项目
-
-**你需要**:
-* jdk1.8
-* mvn
-* mysql
-
-然后编辑resources目录下的application.properties文件，将其中的数据库用户名密码
-和数据库名称改为你自己的数据库配置
-
-命令行进入项目目录下，运行mvn spring-boot:run,访问localhost:8080即可
