@@ -33,7 +33,7 @@ import java.util.Set;
 @RequestMapping("/user/{id}")
 public class UserController {
 
-    private static final int PAGE_SIZE=2;
+    private static final int PAGE_SIZE=4;
 
     private final BlogInfoService blogInfoService;
 

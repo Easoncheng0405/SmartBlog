@@ -33,7 +33,7 @@ public class AllBlogController {
 
     private final BlogInfoService blogInfoService;
 
-    private static final int PAGE_SIZE = 2;
+    private static final int PAGE_SIZE = 10;
 
     @Autowired
     public AllBlogController(BlogInfoService blogInfoService) {

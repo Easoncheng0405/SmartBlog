@@ -43,7 +43,10 @@ public class EditorController {
     }
 
     @GetMapping
-    public String get() {
+    public String get(@RequestParam(value = "id", defaultValue = "-1", required = false) long id,Model model) {
+        model.addAttribute("flag",id);
+        if (id != -1)
+            model.addAttribute("content",blogService.findById(id).getContent());
         return "edit";
     }
 
@@ -53,8 +56,9 @@ public class EditorController {
      * @return 首页
      */
     @PostMapping
-    public String post(HttpSession session, @RequestParam("content") String content, Model model) {
-
+    public String post(HttpSession session, @RequestParam("content") String content,
+                       Model model, @RequestParam(value = "id", defaultValue = "-1", required = false) long id) {
+        model.addAttribute("flag",id);
         User user = (User) session.getAttribute("CURRENT_USER");
         Blog blog = getBlog(content);
         if (blog == null) {
@@ -68,11 +72,14 @@ public class EditorController {
         BlogInfo blogInfo = new BlogInfo();
         blogInfo.setBlog(blog);
         blogInfo.setUser(user);
+        if(id!=-1) {
+            blog.setId(id);
+            blogInfo.setId(blogInfoService.findByBlog(blog).getId());
+            UserInfo userInfo = userInfoService.findByUser(user);
+            userInfo.setCount(userInfo.getCount() + content.length());
+            userInfoService.save(userInfo);
+        }
         blog = blogService.save(blog);
-
-        UserInfo userInfo=userInfoService.findByUser(user);
-        userInfo.setCount(userInfo.getCount()+content.length());
-        userInfoService.save(userInfo);
         blogInfoService.save(blogInfo);
         return "redirect:/blog/" + blog.getId();
     }

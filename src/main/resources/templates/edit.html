@@ -13,6 +13,7 @@
 <body>
 
 <div>
+    <div hidden="hidden" th:text="${flag}"></div>
     <div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -31,7 +32,7 @@
     <script>
         $('#tips').modal('show');
     </script>
-    <form id="form" method="POST" action="/edit">
+    <form id="form" method="POST" th:action="@{'/edit?id='+${flag}}">
         <div class="editormd" id="editormd">
             <textarea placeholder="" class="editormd-markdown-textarea" name="content"></textarea>
         </div>

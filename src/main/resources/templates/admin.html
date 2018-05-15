@@ -163,7 +163,7 @@
                     <td style="padding-top: 15px;padding-left: 15px;" th:text="${blog.blogInfo.blike}"></td>
                     <td style="padding-top: 15px;padding-left: 15px;" th:text="${blog.blogInfo.collection}"></td>
                     <td>
-                        <a class="btn btn-primary" href="#">编辑</a>
+                        <a class="btn btn-primary" th:href="@{'/edit?id='+${blog.id}}">编辑</a>
                         <button th:id="${blog.id}" class="btn btn-success" onclick="setType(id)">分类</button>
                         <button type="submit" class="btn btn-danger">删除</button>
                         <script>

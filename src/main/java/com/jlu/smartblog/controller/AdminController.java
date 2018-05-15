@@ -34,7 +34,7 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final static int PAGE_SIZE = 1;
+    private final static int PAGE_SIZE = 6;
 
     private final UserInfoService userInfoService;
 
