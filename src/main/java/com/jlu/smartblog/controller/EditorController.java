@@ -43,10 +43,10 @@ public class EditorController {
     }
 
     @GetMapping
-    public String get(@RequestParam(value = "id", defaultValue = "-1", required = false) long id,Model model) {
-        model.addAttribute("flag",id);
+    public String get(@RequestParam(value = "id", defaultValue = "-1", required = false) long id, Model model) {
+        model.addAttribute("flag", id);
         if (id != -1)
-            model.addAttribute("content",blogService.findById(id).getContent());
+            model.addAttribute("content", blogService.findById(id).getContent());
         return "edit";
     }
 
@@ -58,7 +58,7 @@ public class EditorController {
     @PostMapping
     public String post(HttpSession session, @RequestParam("content") String content,
                        Model model, @RequestParam(value = "id", defaultValue = "-1", required = false) long id) {
-        model.addAttribute("flag",id);
+        model.addAttribute("flag", id);
         User user = (User) session.getAttribute("CURRENT_USER");
         Blog blog = getBlog(content);
         if (blog == null) {
@@ -72,9 +72,10 @@ public class EditorController {
         BlogInfo blogInfo = new BlogInfo();
         blogInfo.setBlog(blog);
         blogInfo.setUser(user);
-        if(id!=-1) {
+        if (id != -1) {
             blog.setId(id);
             blogInfo.setId(blogInfoService.findByBlog(blog).getId());
+        }else{
             UserInfo userInfo = userInfoService.findByUser(user);
             userInfo.setCount(userInfo.getCount() + content.length());
             userInfoService.save(userInfo);
